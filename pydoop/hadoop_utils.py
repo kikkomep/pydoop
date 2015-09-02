@@ -602,6 +602,23 @@ class PathFinder(object):
         return "/tmp/hadoop-{0}".format(getpass.getuser()) if not hadoop_tmp_dir else hadoop_tmp_dir
 
 
+    def hadoop_default_fs(self, hadoop_home=None):
+        params = self.hadoop_params(hadoop_home=hadoop_home)
+        default_name = params.get('fs.default.name').encode('ascii')
+        info = re.search('(.*//)(.*)', default_name)
+        if info:
+            if info.group(1) == 'file:///':
+                return (info.group(1), info.group(2))
+            else:
+                info_port = re.search('(.*//)(.*):(.*)', default_name)
+                if info_port:
+                    return (info_port.group(1), info_port.group(2), int(info_port.group(3)))
+                else:
+                    return (info.group(1), info.group(2), 0) #8020 if self.is_cloudera(hadoop_home) else 9000
+        else:
+            return ("file:///", "{0}/dfs/name".format(self.hadoop_tmp_dir()))
+
+
     def find(self):
         info = {}
         for a in (
