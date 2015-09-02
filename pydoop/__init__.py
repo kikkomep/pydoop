@@ -111,6 +111,10 @@ def hadoop_classpath(hadoop_home=None):
     return _PATH_FINDER.hadoop_classpath(hadoop_home)
 
 
+def hadoop_default_fs(hadoop_home=None):
+    return _PATH_FINDER.hadoop_default_fs(hadoop_home)
+
+
 def package_dir():
     return os.path.dirname(os.path.abspath(__file__))
 
