@@ -36,14 +36,17 @@ class TestConnection(unittest.TestCase):
         self.hp_cases = [("default", 0)]
         self.u_cases = [None, CURRENT_USER]
         if not hdfs.default_is_local():
-            self.hp_cases.append((u.HDFS_HOST, u.HDFS_PORT))
+            hadoop_default_fs = pydoop.hadoop_default_fs()
+            default_fs_host = hadoop_default_fs[1]
+            default_fs_port = hadoop_default_fs[2]
+            self.hp_cases.append((default_fs_host, default_fs_port))
             self.u_cases.append("nobody")
             try:
-                hdfs_ip = socket.gethostbyname(u.HDFS_HOST)
+                hdfs_ip = socket.gethostbyname(default_fs_host)
             except socket.gaierror:
                 pass
             else:
-                self.hp_cases.append((hdfs_ip, u.HDFS_PORT))
+                self.hp_cases.append((hdfs_ip, default_fs_port))
 
     def connect(self):
         for host, port in self.hp_cases:
