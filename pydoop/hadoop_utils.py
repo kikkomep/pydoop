@@ -29,6 +29,7 @@ Known issues: from-tarball CDH installation is not supported.
 import os
 import glob
 import re
+import getpass
 import platform
 import subprocess as sp
 import xml.dom.minidom as dom
@@ -592,6 +593,14 @@ class PathFinder(object):
             jars.extend([self.hadoop_native(), self.hadoop_conf()])
             self.__hadoop_classpath = ':'.join(jars)
         return self.__hadoop_classpath
+
+
+    def hadoop_tmp_dir(self, hadoop_conf=None, hadoop_home=None, params=None):
+        if not params:
+            params = self.hadoop_params(hadoop_conf, hadoop_home)
+        hadoop_tmp_dir = params.get('hadoop.tmp.dir')
+        return "/tmp/hadoop-{0}".format(getpass.getuser()) if not hadoop_tmp_dir else hadoop_tmp_dir
+
 
     def find(self):
         info = {}
