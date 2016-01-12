@@ -1,0 +1,90 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+# check docker version
+- docker --version
+# check images
+- docker images
+# check running services
+- docker ps -a
+# generate ssh keys
+- ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+- cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+- echo 'StrictHostKeyChecking=no' >> ~/.ssh/config
+
+before_script:  
+  #- dev_tools/docker/new/start-services.sh kikkomep/docker hadoop-2.6.0 
+  - docker pull crs4/hadoop-apache-2.7.1 
+  
+script:
+# run tests in a single container
+#- dev_tools/docker-hadoop/start-single-container-services.sh -c "/shared/dev_tools/docker/new/run-tests.sh $HDFS_BACKEND" apache-2.7.1
+  - docker run -it --rm -h docker-hadoop -v $(pwd):/sharing crs4/hadoop-apache-2.7.1 start-hadoop-services /bin/bash /sharing/.docker-travis-tests.sh
+
+env:
+  matrix:
+     # -------------------------------------------------------------
+     # Apache Hadoop Distributions
+     # -------------------------------------------------------------
+     # HADOOP standard 1.*
+#    - HADOOPVERSION=1.0.4 HDFS_BACKEND=native
+#    - HADOOPVERSION=1.0.4 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=1.0.4 HDFS_BACKEND=native
+#    - HADOOPVERSION=1.0.4 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=1.1.2 HDFS_BACKEND=native
+#    - HADOOPVERSION=1.1.2 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=1.2.1 HDFS_BACKEND=native
+#    - HADOOPVERSION=1.2.1 HDFS_BACKEND=jpype-bridged
+     # HADOOP standard 2.*
+#    - HADOOPVERSION=2.2.0 HDFS_BACKEND=native
+#    - HADOOPVERSION=2.2.0 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=2.4.1 HDFS_BACKEND=native
+#    - HADOOPVERSION=2.4.1 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=2.5.2 HDFS_BACKEND=native
+#    - HADOOPVERSION=2.5.2 HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=hadoop-2.6.0 HDFS_BACKEND=native
+#    - HADOOPVERSION=hadoop-2.6.0 HDFS_BACKEND=jpype-bridged
+    - HADOOPVERSION=hadoop-2.7.1 HDFS_BACKEND=native
+#    - HADOOPVERSION=hadoop-2.7.1 HDFS_BACKEND=jpype-bridged
+    # -------------------------------------------------------------
+    # Hortonworks Distributions
+    # -------------------------------------------------------------
+    # HDP2.2
+    # - HADOOPVERSION=HDP2.2.0.0 HDFS_BACKEND=native    
+    # - HADOOPVERSION=HDP2.2.0.0 HDFS_BACKEND=jpype-bridged    
+    # -------------------------------------------------------------
+    # Cloudera Distributions
+    # -------------------------------------------------------------
+    # CDH v4
+#    - HADOOPVERSION=cdh4.2.0 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.2.0 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.2.0 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.2.0 YARN=true HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.3.0 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.3.0 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.3.0 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.3.0 YARN=true HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.4.0 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.4.0 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.4.0 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.4.0 YARN=true HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.5.0 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.5.0 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh4.5.0 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh4.5.0 YARN=true HDFS_BACKEND=jpype-bridged
+    # CDH v5
+#    - HADOOPVERSION=cdh5.0.5 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.0.5 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh5.0.5 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.0.5 YARN=true HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh5.1.4 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.1.4 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh5.1.4 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.1.4 YARN=true HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh5.2.1 YARN=false HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.2.1 YARN=false HDFS_BACKEND=jpype-bridged
+#    - HADOOPVERSION=cdh5.2.1 YARN=true HDFS_BACKEND=native
+#    - HADOOPVERSION=cdh5.2.1 YARN=true HDFS_BACKEND=jpype-bridged
