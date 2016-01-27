@@ -20,7 +20,8 @@ usage() {
 }
 
 # parse arguments
-OPTS=`getopt -o r:p: --long "repository:,prefix:" -n 'parse-options' -- "$@"`
+getopt_cmd=$(if [[ `uname` == "Darwin" ]]; then echo "/usr/local/Cellar/gnu-getopt/1.1.6/bin/getopt"; else echo "getopt"; fi)
+OPTS=`${getopt_cmd} -o r:p: --long "repository:,prefix:" -n 'parse-options' -- "$@"`
 
 # check parsing result
 if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; usage; exit 1 ; fi
