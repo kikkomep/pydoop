@@ -26,6 +26,7 @@ fi
 
 # set the working dir
 working_dir="${script_path}/../../"
+echo "Working DIR: ${working_dir}"
 cd ${working_dir}
 
 # clean install dir

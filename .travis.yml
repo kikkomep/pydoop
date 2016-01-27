@@ -21,9 +21,10 @@ before_script:
   - dev_tools/docker/start-local-docker-hadoop.sh apache-2.7.1
   
 script:
-# run tests in a single container
-#- dev_tools/docker-hadoop/start-single-container-services.sh -c "/shared/dev_tools/docker/new/run-tests.sh $HDFS_BACKEND" apache-2.7.1
+  # run tests on a single container
+  #- dev_tools/docker-hadoop/start-single-container-services.sh -c "/shared/dev_tools/docker/new/run-tests.sh $HDFS_BACKEND" apache-2.7.1
   #- docker run -it --rm -h docker-hadoop -v $(pwd):/sharing crs4/hadoop-apache-2.7.1 start-hadoop-services /bin/bash /sharing/.docker-travis-tests.sh
+  - echo "CURRENT DIR: $(pwd)"
   - dev_tools/docker/install-and-test-pydoop.sh
 
 env:
