@@ -203,7 +203,7 @@ class TestHDFS(TestCommon):
 
 def suite():
     suite_ = unittest.TestSuite()
-    suite_.addTest(TestConnection('connect'))
+    #suite_.addTest(TestConnection('connect'))
     #suite_.addTest(TestConnection('cache'))
     tests = common_tests()
     if not hdfs.default_is_local():
