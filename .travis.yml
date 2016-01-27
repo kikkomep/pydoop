@@ -26,8 +26,8 @@ env:
     - HADOOPVERSION=apache-2.4.1 HDFS_BACKEND=jpype-bridged
     - HADOOPVERSION=apache-2.5.2 HDFS_BACKEND=native
     - HADOOPVERSION=apache-2.5.2 HDFS_BACKEND=jpype-bridged
-    - HADOOPVERSION=hadoop-2.6.0 HDFS_BACKEND=native
-    - HADOOPVERSION=hadoop-2.6.0 HDFS_BACKEND=jpype-bridged
+    - HADOOPVERSION=apache-2.6.0 HDFS_BACKEND=native
+    - HADOOPVERSION=apache-2.6.0 HDFS_BACKEND=jpype-bridged
     - HADOOPVERSION=apache-2.7.1 HDFS_BACKEND=native
     - HADOOPVERSION=apache-2.7.1 HDFS_BACKEND=jpype-bridged
     # -------------------------------------------------------------
