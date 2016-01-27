@@ -2,6 +2,10 @@
 
 HDFS_BACKEND="native"
 
+if [[ -n $1 ]]; then
+    HDFS_BACKEND=$1
+fi
+
 # current path
 script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
