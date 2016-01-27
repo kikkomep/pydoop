@@ -20,7 +20,7 @@ usage() {
 }
 
 # parse arguments
-OPTS=`/usr/local/Cellar/gnu-getopt/1.1.6/bin/getopt -o r:p: --long "repository:,prefix:" -n 'parse-options' -- "$@"`
+OPTS=`getopt -o r:p: --long "repository:,prefix:" -n 'parse-options' -- "$@"`
 
 # check parsing result
 if [ $? != 0 ] ; then echo "Failed parsing options." >&2 ; usage; exit 1 ; fi
