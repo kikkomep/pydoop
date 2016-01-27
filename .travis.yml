@@ -18,7 +18,7 @@ before_install:
 before_script:  
   #- dev_tools/docker/new/start-services.sh kikkomep/docker hadoop-2.6.0 
   - docker pull crs4/hadoop-apache-2.7.1
-  - dev_tools/docker/start-local-docker-hadoop.sh
+  - dev_tools/docker/start-local-docker-hadoop.sh apache-2.7.1
   
 script:
 # run tests in a single container
