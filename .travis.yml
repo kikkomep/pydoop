@@ -1,6 +1,11 @@
 jdk: 
 - oraclejdk8
 
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
 env:
   global: 
     secure: d1kOuK3dSEs2nNZdGFNcY9KLI5PuWOv7xq9V1b+/+rzhi/BezsvEAjRw+7SeVa/sBk5LcKuKtW06Mjst0npXk487TpQpuLSNzUbX1aaTw4+oG0iJWKeK559iiMs+MBSFYvC6XPts5DkNM+hn5KmhuzCTHBotCv7ZB9Zmuj/ULsg=
