@@ -1,10 +1,5 @@
 jdk: 
-- oraclejdk8
-
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
+- oraclejdk7
 
 env:
   global: 
@@ -82,18 +77,11 @@ env:
 python:
 - "2.7"
 
-#before_install:
-
-
-#install:
-
-script:
+before_install:
 - export PATH=$VIRTUAL_ENV/bin:$PATH
 - export PYTHONPATH=${VIRTUAL_ENV}/lib/python2.7/site-packages
 #- export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
 #- export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
-- jdk_switcher use oraclejdk8
-- echo $JAVA_HOME
 - java -version
 - sudo apt-get update
 - sudo apt-get install build-essential python-all-dev libssl-dev zip
@@ -119,13 +107,12 @@ script:
 - hadoop version
 - hadoop classpath
 
-
+install:
 - $VIRTUAL_ENV/bin/python setup.py build --hdfs-core-impl $HDFS_BACKEND
 - $VIRTUAL_ENV/bin/python setup.py install --skip-build
 - $VIRTUAL_ENV/bin/python setup.py bdist_wheel
 
-
-
+script:
 - cd test;
 - top -b -n 1 -c # run top in batch mode, 1 iteration, show command. top on Travis doesn't support sort (-o)
 - $VIRTUAL_ENV/bin/python all_tests.py
