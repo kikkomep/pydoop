@@ -82,7 +82,12 @@ env:
 python:
 - "2.7"
 
-before_install:
+#before_install:
+
+
+#install:
+
+script:
 - export PATH=$VIRTUAL_ENV/bin:$PATH
 - export PYTHONPATH=${VIRTUAL_ENV}/lib/python2.7/site-packages
 #- export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
@@ -114,12 +119,13 @@ before_install:
 - hadoop version
 - hadoop classpath
 
-install:
+
 - $VIRTUAL_ENV/bin/python setup.py build --hdfs-core-impl $HDFS_BACKEND
 - $VIRTUAL_ENV/bin/python setup.py install --skip-build
 - $VIRTUAL_ENV/bin/python setup.py bdist_wheel
 
-script:
+
+
 - cd test;
 - top -b -n 1 -c # run top in batch mode, 1 iteration, show command. top on Travis doesn't support sort (-o)
 - $VIRTUAL_ENV/bin/python all_tests.py
