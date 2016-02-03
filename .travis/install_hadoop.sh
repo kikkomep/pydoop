@@ -204,7 +204,7 @@ function install_standard_hadoop() {
 
     export HADOOP_HOME="${PWD}/hadoop-${HadoopVersion}"
     if [[ "${HadoopVersion}" == 2.*.* ]]; then
-        export HADOOP_CONF_DIR="${PWD}/.travis/hadoop-${HadoopVersion}-conf/"
+        export HADOOP_CONF_DIR="${PWD}/.travis/hadoop-2-conf/"
         export HADOOP_BIN="${HADOOP_HOME}/sbin/"
         export HADOOP_COMMON_LIB_NATIVE_DIR="${HADOOP_HOME}/lib/native"
         export HADOOP_OPTS="-Djava.library.path=${HADOOP_HOME}/lib"
