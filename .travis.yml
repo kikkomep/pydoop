@@ -86,7 +86,8 @@ before_install:
 - export PATH=$VIRTUAL_ENV/bin:$PATH
 - export PYTHONPATH=${VIRTUAL_ENV}/lib/python2.7/site-packages
 #- export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:bin/javac::")
-- export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+#- export JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+- jdk_switcher use oraclejdk8
 - echo $JAVA_HOME
 - java -version
 - sudo apt-get update
